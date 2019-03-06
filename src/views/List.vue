@@ -1,39 +1,70 @@
 <template>
   <div class="listContainer">
-
+    <div v-for="noticia in arrayNoticias" :key="noticia.id">
+      <router-link :to="{ name : 'news'}">
+        <div>
+          <h1>{{ noticia.title }}</h1>
+          <img :src="noticia.urlToImage">
+        </div>
+        <div>
+          <p>{{ noticia.publishedAt | tiempoTranscurrido}}</p>
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 
+import moment from 'moment';
+
+moment.locale('es');
 
 export default {
+
   name: 'list',
   components: {
-
+    moment
   },
   data : function(){
     return {
-        arrayNews : []
+        arrayNoticias : [],
+        totalResultados : 0,
+        pagina : 1
     }
   },
   mounted : function(){
 
-    let that = this;
+      this.getNews(this.pagina);
 
-    axios.get('https://newsapi.org/v2/top-headlines?sources=el-mundo')
-      .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+  },methods:{
+    getNews : function(pagina){
+     
+     let that = this;
+
+      axios.get(`https://newsapi.org/v2/everything?sources=el-mundo&pageSize=100&page=${pagina}`)
+        .then(function (response) {
+        // handle success
+
+        that.totalResultados = response.data.totalResults;
+        that.arrayNoticias = response.data.articles;
+        //console.log(that.arrayNoticias);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+    }
+  },filters :{
+     tiempoTranscurrido : function(fecha){
+           
+        let tiempo = moment(`${fecha}`).fromNow();
+
+        return tiempo;
+     }
   }
 }
 </script>
