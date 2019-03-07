@@ -2,8 +2,14 @@
   <div class="listContainer">
 
     <h1>Mundicias</h1>
-    <div class="cabecera-inicio">
+    <div class="cabecera-inicio" :style="`background-image : url(${imagenPrimera});background-position : center center;background-size : cover;background-repeat : no-repeat`">
       <img src="/img/icono-menu.svg" alt="" class="icono-menu">
+      <div>
+          <transition name="fade">
+            <input v-if="mostrar" type="text" v-model="busqueda" placeholder="Titulo de la noticia" class="input">
+          </transition>
+        <img @click="mostrar = !mostrar" src="/img/search.svg" alt="" class="icono-menu2">
+      </div>
     </div>
     <div v-for="(noticia,pos) in arrayNoticias" :key="noticia.id">
       <router-link :to="{ name : 'news',params : {pos : pos} }" v-if="cleanHTML(noticia.content) != ''">
@@ -37,11 +43,17 @@ export default {
     return {
         arrayNoticias : [],
         totalResultados : 0,
+        mostrar : false,
+        imagenPrimera : ''
     }
   },
   mounted : function(){
 
       this.getNews();
+
+      let datos = JSON.parse(localStorage.getItem("baseDatos"));
+
+
 
   },methods:{
     getNews : function(){
@@ -53,7 +65,8 @@ export default {
         .then(function (response) {
         // handle success
 
-        that.arrayNoticias = response.data.items;
+        that.cleanArray(response.data.items);
+
         let bd = {
             "bd" : that.arrayNoticias
         };
@@ -72,6 +85,18 @@ export default {
       
       return this.$options.filters.quitarHTML(texto);
 
+    },
+    cleanArray (noticias){
+      
+      for(let item of noticias){
+        if(this.cleanHTML(item.content) != ''){
+            this.arrayNoticias.push(item);
+            this.imagenPrimera = this.arrayNoticias[0].thumbnail;
+        }else{
+
+        }
+      }
+      console.log(this.arrayNoticias);
     }
     ,
   },filters :{
@@ -103,5 +128,24 @@ export default {
 .listContainer{
   width: 100vw;
   height: 100vh;
+}
+
+.icono-menu2{
+    position: absolute;
+    width: 30px;
+    padding: 1rem;
+    right: 100px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.input{
+  border: 1px solid black;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
 }
 </style>
