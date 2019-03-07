@@ -1,0 +1,34 @@
+.header
+    height: 60px
+    position: fixed
+    left: 0
+    top: 0
+    right: 0
+    box-shadow: 0 1px 6px rgba($negro, .5)
+    display: flex
+    justify-content: space-between
+    align-items: center
+    background-color: $blanco
+    &__regresar
+        height: 40px
+        width: 40px
+        background-color: $turquesa-oscuro
+        mask-image: url(../img/icono-atras.svg)
+        margin-left: 1.5rem
+    &__data
+        display: flex
+        flex-direction: column
+        justify-content: center
+        margin-right: 1.5rem
+        text-align: right
+    &__data-info
+        display: flex
+        justify-items: center
+        align-items: center
+    &__fecha
+        font-size: .6rem
+        margin-bottom: .25rem
+    &__duracion
+        font-style: italic
+        font-size: .6rem
+        margin-top: .25rem
