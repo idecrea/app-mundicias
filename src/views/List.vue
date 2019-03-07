@@ -1,10 +1,12 @@
 <template>
   <div class="listContainer">
+    <div class="cabecera-inicio">
+      <img src="/img/icono-menu.svg" alt="" class="icono-menu">
+    </div>
     <div v-for="noticia in arrayNoticias" :key="noticia.id">
       <router-link :to="{ name : 'news'}">
         <div>
           <h1>{{ noticia.title }}</h1>
-          <img :src="noticia.urlToImage">
         </div>
         <div>
           <p>{{ noticia.publishedAt | tiempoTranscurrido}}</p>

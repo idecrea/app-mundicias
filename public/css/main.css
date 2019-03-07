@@ -320,7 +320,7 @@ template {
   font-style: normal; }
 
 body {
-  font-family: 'texto'; }
+  font-family: 'text'; }
 
 input {
   border: initial;
@@ -336,8 +336,36 @@ h1, p, h2 {
 
 a {
   text-decoration: none;
-  color: #000000;
+  color: #000;
   cursor: pointer; }
 
 button {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+.cabecera-inicio {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: relative;
+  height: 250px; }
+
+.icono-menu {
+  position: absolute;
+  width: 30px;
+  padding: 1rem;
+  right: 0; }
+
+.noticia {
+  background-color: #dcdcdc;
+  width: 100%;
+  position: relative; }
+  .noticia__titulo {
+    font-weight: 500;
+    position: absolute;
+    top: 0;
+    left: 0; }
+  .noticia__fecha {
+    font-style: italic; }
+
+/*# sourceMappingURL=main.css.map */
