@@ -11,7 +11,7 @@ export default new Router({
       component: () => import('./views/List.vue')
     },
     {
-      path: '/news',
+      path: '/news/:pos',
       name: 'news',
       component: () => import('./views/News.vue')
     }

@@ -19,3 +19,8 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+
+public/css/main.css.map
+public/css/main.css
+prepros-6.config
