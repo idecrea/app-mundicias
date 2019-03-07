@@ -1,14 +1,16 @@
 <template>
   <div class="listContainer">
-    <div v-for="noticia in arrayNoticias" :key="noticia.id">
-      <router-link :to="{ name : 'news'}">
-        <div>
+    <h1>Mundicias</h1>
+    <div v-for="(noticia,pos) in arrayNoticias" :key="noticia.id">
+      <router-link :to="{ name : 'news',params : {pos : pos} }" v-if="cleanHTML(noticia.content) != ''">
           <h1>{{ noticia.title }}</h1>
-          <img :src="noticia.urlToImage">
-        </div>
-        <div>
-          <p>{{ noticia.publishedAt | tiempoTranscurrido}}</p>
-        </div>
+          <!--<img :src="noticia.thumbnail">-->
+          <p>{{ noticia.pubDate | tiempoTranscurrido}}</p>
+          <!--<p>{{ noticia.content | quitarHTML}}</p>-->
+          <ol>
+              <li v-for="categoria in noticia.categories" :key="categoria.id">{{ categoria }}</li>
+          </ol>
+          <p> Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} minutos</p>
       </router-link>
     </div>
   </div>
@@ -17,6 +19,7 @@
 <script>
 
 import moment from 'moment';
+import { constants } from 'fs';
 
 moment.locale('es');
 
@@ -30,25 +33,28 @@ export default {
     return {
         arrayNoticias : [],
         totalResultados : 0,
-        pagina : 1
     }
   },
   mounted : function(){
 
-      this.getNews(this.pagina);
+      this.getNews();
 
   },methods:{
-    getNews : function(pagina){
+    getNews : function(){
      
      let that = this;
-
-      axios.get(`https://newsapi.org/v2/everything?sources=el-mundo&pageSize=100&page=${pagina}`)
+    let url = 'https://cors-anywhere.herokuapp.com/https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.abc.es%2Frss%2Ffeeds%2Fabc_ultima.xml';
+    
+    axios.get(url)
         .then(function (response) {
         // handle success
 
-        that.totalResultados = response.data.totalResults;
-        that.arrayNoticias = response.data.articles;
-        //console.log(that.arrayNoticias);
+        that.arrayNoticias = response.data.items;
+        let bd = {
+            "bd" : that.arrayNoticias
+        };
+        localStorage.setItem("baseDatos", JSON.stringify(bd));
+        
       })
       .catch(function (error) {
         // handle error
@@ -57,13 +63,33 @@ export default {
       .then(function () {
         // always executed
       });
+    },
+    cleanHTML : function(texto){
+      
+      return this.$options.filters.quitarHTML(texto);
+
     }
+    ,
   },filters :{
      tiempoTranscurrido : function(fecha){
            
         let tiempo = moment(`${fecha}`).fromNow();
 
         return tiempo;
+     },
+     quitarHTML : function(texto){
+
+       return texto.replace(/<[^>]+>/g, '');
+     },
+     tiempoLectura : function(texto){
+
+       let palabras_minuto = 150;
+       texto = texto.split(' ');
+
+        
+       return Math.ceil(texto.length / palabras_minuto);
+
+
      }
   }
 }
