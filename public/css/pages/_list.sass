@@ -1,10 +1,13 @@
+.listContainer
+    background-color: $turquesa-oscuro
+
 .cabecera-inicio
     position: fixed
     top: 0
     left: 0
     right: 0
     position: relative
-    height: 250px
+    height: 230px
     background-color: 
     
 .icono-menu
@@ -13,17 +16,41 @@
     padding: 1rem
     right: 0
 
+.logo-mundicio
+    position: absolute
+    left: 0
+    top: 0
+    padding: 1rem
+    height: 70%
+
 .noticia // div
     background-color: $gris
     width: 100%
+    margin-bottom: 10px
     position: relative
     &__titulo // h1
         font-weight: 500
-        position: absolute
-        top: 0
-        left: 0
+        padding: 1rem
+        font-size: 1.7rem
     &__categoria // ul>li
+        padding-inline-start: 0
+        padding-left: 1rem
+        margin-top: 20px
+        padding: 1rem
+        margin: 0
+        li 
+            list-style-type: none
+            margin-top: 0.5rem
+
+    &__tiempo
+        position: absolute
+        bottom: 0
+        right: 0
+        padding: 1rem
+        font-size: 0.8rem
+        p 
+            text-align: right
+            
         
-    &__fecha // p
-        font-style: italic
-    &__tiempo-lectura // p
+        
+        

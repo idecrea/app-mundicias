@@ -1,20 +1,21 @@
 <template>
   <div class="listContainer">
-
-    <h1>Mundicias</h1>
     <div class="cabecera-inicio">
+      <img src="/img/mundicio.svg" alt="" class="logo-mundicio">
       <img src="/img/icono-menu.svg" alt="" class="icono-menu">
     </div>
-    <div v-for="(noticia,pos) in arrayNoticias" :key="noticia.id">
+    <div v-for="(noticia,pos) in arrayNoticias" :key="noticia.id" class="noticia">
       <router-link :to="{ name : 'news',params : {pos : pos} }" v-if="cleanHTML(noticia.content) != ''">
-          <h1>{{ noticia.title }}</h1>
-          <!--<img :src="noticia.thumbnail">-->
-          <p>{{ noticia.pubDate | tiempoTranscurrido}}</p>
+          <h1 class="noticia__titulo">{{ noticia.title }}</h1>
           <!--<p>{{ noticia.content | quitarHTML}}</p>-->
-          <ol>
+          <ol class="noticia__categoria">
               <li v-for="categoria in noticia.categories" :key="categoria.id">{{ categoria }}</li>
           </ol>
-          <p> Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} minutos</p>
+          <!--<img :src="noticia.thumbnail">-->
+          <div class="noticia__tiempo">
+            <p>{{ noticia.pubDate | tiempoTranscurrido}}</p>
+            <p> Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} minutos</p>
+          </div>
       </router-link>
     </div>
   </div>
@@ -98,10 +99,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.listContainer{
-  width: 100vw;
-  height: 100vh;
-}
-</style>

@@ -303,19 +303,19 @@ template {
 
 @font-face {
   font-family: 'text';
-  src: url(../font/Muli-Regular.woff2) format("woff2");
+  src: url(../fonts/Muli-Regular.woff2) format("woff2");
   font-weight: 400;
   font-style: normal; }
 
 @font-face {
   font-family: 'text';
-  src: url(../font/Muli-Italic.woff2) format("woff2");
+  src: url(../fonts/Muli-Italic.woff2) format("woff2");
   font-weight: 400;
   font-style: italic; }
 
 @font-face {
   font-family: 'text';
-  src: url(../font/Muli-Bold.woff2) format("woff2");
+  src: url(../fonts/Muli-Bold.woff2) format("woff2");
   font-weight: 500;
   font-style: normal; }
 
@@ -342,13 +342,16 @@ a {
 button {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
+.listContainer {
+  background-color: #397b89; }
+
 .cabecera-inicio {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   position: relative;
-  height: 250px; }
+  height: 230px; }
 
 .icono-menu {
   position: absolute;
@@ -356,16 +359,39 @@ button {
   padding: 1rem;
   right: 0; }
 
+.logo-mundicio {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 1rem;
+  height: 70%; }
+
 .noticia {
   background-color: #dcdcdc;
   width: 100%;
+  margin-bottom: 10px;
   position: relative; }
   .noticia__titulo {
     font-weight: 500;
+    padding: 1rem;
+    font-size: 1.7rem; }
+  .noticia__categoria {
+    -webkit-padding-start: 0;
+    padding-inline-start: 0;
+    padding-left: 1rem;
+    margin-top: 20px;
+    padding: 1rem;
+    margin: 0; }
+    .noticia__categoria li {
+      list-style-type: none;
+      margin-top: 0.5rem; }
+  .noticia__tiempo {
     position: absolute;
-    top: 0;
-    left: 0; }
-  .noticia__fecha {
-    font-style: italic; }
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    font-size: 0.8rem; }
+    .noticia__tiempo p {
+      text-align: right; }
 
 /*# sourceMappingURL=main.css.map */
