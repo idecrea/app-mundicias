@@ -133,16 +133,6 @@ export default {
 
 
 <style scoped>
-.cargando {
-  position: absolute;
-  left: 59%;
-  top: 110%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-}
 
-.parrafo-loading {
-  color: white;
-}
 </style>
 
