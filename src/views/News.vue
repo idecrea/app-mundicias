@@ -1,7 +1,6 @@
 <template>
   <div class="news">
     <div class="header">
-
       <router-link class="header__regresar" :to="{ name:'list' }"></router-link>
       <div v-if="baseDatos.length > 0" class="header__data">
         <div class="header__fecha">

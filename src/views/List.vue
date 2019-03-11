@@ -1,14 +1,27 @@
 <template>
   <div class="listContainer">
-    <div class="cabecera-inicio imagen-primera-noticia" :style="`background-image : url(${imagenPrimera}); `">
-      <img src="/img/mundicio.svg" alt="" class="logo-mundicio">
+    <div
+      class="cabecera-inicio imagen-primera-noticia"
+      :style="`background-image : url(${imagenPrimera}); `"
+    >
+      <img v-if="!loading" src="/img/mundicio.svg" alt class="logo-mundicio">
+      <img v-if="!loading" src="/img/icono-menu.svg" alt class="icono-menu">
+      <div v-if="loading" class="cargando">
+        <Loading></Loading>
+        <p class="parrafo-loading">Cargando noticias ...</p>
+      </div>
 
-      <img src="/img/icono-menu.svg" alt="" class="icono-menu">
-      <div>
-          <transition name="fade">
-            <input v-if="mostrar" type="text" v-model="busqueda" placeholder="Titulo de la noticia" class="input">
-          </transition>
-        <img @click="mostrar = !mostrar" src="/img/search.svg" alt="" class="icono-menu2">
+      <div v-if="!loading">
+        <transition name="fade">
+          <input
+            v-if="mostrar"
+            type="text"
+            v-model="busqueda"
+            placeholder="Titulo de la noticia"
+            class="input"
+          >
+        </transition>
+        <img @click="mostrar = !mostrar" src="/img/search.svg" alt class="icono-menu2">
       </div>
     </div>
     <div v-for="(noticia,pos) in arrayNoticiasFiltrado" :key="noticia.id" class="noticia">
@@ -21,39 +34,39 @@
             <p>{{ noticia.pubDate | tiempoTranscurrido}}</p>
             <p> Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} minutos</p>
           </div>
+
       </router-link>
     </div>
   </div>
 </template>
 
 <script>
+import Loading from "@/components/Loading.vue";
+import moment from "moment";
+import { constants } from "fs";
 
-import moment from 'moment';
-import { constants } from 'fs';
-
-moment.locale('es');
+moment.locale("es");
 
 export default {
-
-  name: 'list',
+  name: "list",
   components: {
-    moment
+    moment,
+    Loading
   },
-  data : function(){
+  data: function() {
     return {
         arrayNoticias : [],
         totalResultados : 0,
         mostrar : false,
         imagenPrimera : '',
-        busqueda : ''
+        busqueda : '',
+        loading : true
     }
+
   },
-  mounted : function(){
-
-      this.getNews();
-
-      let datos = JSON.parse(localStorage.getItem("baseDatos"));
-
+  mounted: function() {
+    this.getNews();
+    let datos = JSON.parse(localStorage.getItem("baseDatos"));
   },methods:{
     getNews : function(){
      
@@ -70,7 +83,7 @@ export default {
             "bd" : that.arrayNoticias
         };
         localStorage.setItem("baseDatos", JSON.stringify(bd));
-        
+        that.loading = false;
         console.log(that.arrayNoticias);
       })
       .catch(function (error) {
@@ -81,44 +94,33 @@ export default {
         // always executed
       });
     },
-    cleanHTML : function(texto){
-      
+    cleanHTML: function(texto) {
       return this.$options.filters.quitarHTML(texto);
-
     },
-    cleanArray (noticias){
-      
-      for(let item of noticias){
-        if(this.cleanHTML(item.content) != ''){
-            this.arrayNoticias.push(item);
-            this.imagenPrimera = this.arrayNoticias[0].thumbnail;
-        }else{
-
+    cleanArray(noticias) {
+      for (let item of noticias) {
+        if (this.cleanHTML(item.content) != "") {
+          this.arrayNoticias.push(item);
+          this.imagenPrimera = this.arrayNoticias[0].thumbnail;
+        } else {
         }
       }
       //console.log(this.arrayNoticias);
     }
-    ,
-  },filters :{
-     tiempoTranscurrido : function(fecha){
-           
-        let tiempo = moment(`${fecha}`).fromNow();
+  },
+  filters: {
+    tiempoTranscurrido: function(fecha) {
+      let tiempo = moment(`${fecha}`).fromNow();
 
-        return tiempo;
-     },
-     quitarHTML : function(texto){
-
-       return texto.replace(/<[^>]+>/g, '');
-     },
-     tiempoLectura : function(texto){
-
-       let palabras_minuto = 150;
-       texto = texto.split(' ');
-
-        
-       return Math.ceil(texto.length / palabras_minuto);
-
-
+      return tiempo;
+    },
+    quitarHTML: function(texto) {
+      return texto.replace(/<[^>]+>/g, "");
+    },
+    tiempoLectura: function(texto) {
+      let palabras_minuto = 150;
+      texto = texto.split(" ");
+      return Math.ceil(texto.length / palabras_minuto);
      }
   },
   computed : {
@@ -134,11 +136,13 @@ export default {
           }
         }
       return lista;
-
     }
   }
-}
+};
 </script>
 
 
+<style scoped>
+
+</style>
 
