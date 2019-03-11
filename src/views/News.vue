@@ -1,16 +1,9 @@
 <template>
   <div class="news">
     <div class="header">
-<<<<<<< HEAD
-      <router-link class="header__regresar" :to="{ name:'list' }">
-        <div id="svg"></div>
-        <object id="my-svg" type="image/svg+xml" data="/img/icono-atras.svg"></object>
-      </router-link>
-      <div class="header__data">
-=======
+
       <router-link class="header__regresar" :to="{ name:'list' }"></router-link>
       <div v-if="baseDatos.length > 0" class="header__data">
->>>>>>> 9f13745651c33bb8de7ff8157a8e5a9db5984d69
         <div class="header__fecha">
           <p>
             {{noticia.pubDate | tiempoTranscurrido}}

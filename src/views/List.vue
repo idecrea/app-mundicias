@@ -11,14 +11,12 @@
         <img @click="mostrar = !mostrar" src="/img/search.svg" alt="" class="icono-menu2">
       </div>
     </div>
-    <div v-for="(noticia,pos) in arrayNoticias" :key="noticia.id" class="noticia">
+    <div v-for="(noticia,pos) in arrayNoticiasFiltrado" :key="noticia.id" class="noticia">
       <router-link :to="{ name : 'news',params : {pos : pos} }" v-if="cleanHTML(noticia.content) != ''">
           <h1 class="noticia__titulo">{{ noticia.title }}</h1>
-          <!--<p>{{ noticia.content | quitarHTML}}</p>-->
           <ol class="noticia__categoria">
               <li v-for="categoria in noticia.categories" :key="categoria.id">{{ categoria }}</li>
           </ol>
-          <!--<img :src="noticia.thumbnail">-->
           <div class="noticia__tiempo">
             <p>{{ noticia.pubDate | tiempoTranscurrido}}</p>
             <p> Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} minutos</p>
@@ -46,7 +44,8 @@ export default {
         arrayNoticias : [],
         totalResultados : 0,
         mostrar : false,
-        imagenPrimera : ''
+        imagenPrimera : '',
+        busqueda : ''
     }
   },
   mounted : function(){
@@ -55,18 +54,16 @@ export default {
 
       let datos = JSON.parse(localStorage.getItem("baseDatos"));
 
-
-
   },methods:{
     getNews : function(){
      
-     let that = this;
-    let url = 'https://cors-anywhere.herokuapp.com/https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.abc.es%2Frss%2Ffeeds%2Fabc_ultima.xml';
-    
-    axios.get(url)
+    let that = this;
+
+    axios.get(`https://cors-anywhere.herokuapp.com/https://api.rss2json.com/v1/api.json?cache=${Date.now()}&rss_url=https%3A%2F%2Fwww.abc.es%2Frss%2Ffeeds%2Fabc_ultima.xml%3Fcache%3D${Date.now()}?cache=${Date.now()}`)
         .then(function (response) {
         // handle success
 
+        console.log(response);
         that.cleanArray(response.data.items);
 
         let bd = {
@@ -74,6 +71,7 @@ export default {
         };
         localStorage.setItem("baseDatos", JSON.stringify(bd));
         
+        console.log(that.arrayNoticias);
       })
       .catch(function (error) {
         // handle error
@@ -122,6 +120,22 @@ export default {
 
 
      }
+  },
+  computed : {
+    arrayNoticiasFiltrado : function(){
+
+      // BUSCADOR
+
+      let lista = [];
+  
+      for(let item of this.arrayNoticias){
+        if(this.busqueda == '' || item.title.toUpperCase().includes(`${this.busqueda.toUpperCase()}`)){
+          lista.push(item);
+          }
+        }
+      return lista;
+
+    }
   }
 }
 </script>
