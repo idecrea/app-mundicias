@@ -12,7 +12,8 @@
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "vue": "^2.6.6",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-svg-draw": "^1.0.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
