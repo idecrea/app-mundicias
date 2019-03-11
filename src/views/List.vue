@@ -1,8 +1,8 @@
 <template>
   <div class="listContainer">
     <div
-      class="cabecera-inicio"
-      :style="`background-image : url(${imagenPrimera});background-position : center center;background-size : cover;background-repeat : no-repeat`"
+      class="cabecera-inicio imagen-primera-noticia"
+      :style="`background-image : url(${imagenPrimera}); `"
     >
       <img v-if="!loading" src="/img/mundicio.svg" alt class="logo-mundicio">
       <img v-if="!loading" src="/img/icono-menu.svg" alt class="icono-menu">
@@ -109,7 +109,7 @@ export default {
         } else {
         }
       }
-      console.log(this.arrayNoticias);
+      //console.log(this.arrayNoticias);
     }
   },
   filters: {
