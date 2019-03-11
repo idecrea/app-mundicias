@@ -98,7 +98,7 @@ export default {
 
         }
       }
-      console.log(this.arrayNoticias);
+      //console.log(this.arrayNoticias);
     }
     ,
   },filters :{
