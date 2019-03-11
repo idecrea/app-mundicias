@@ -1,6 +1,6 @@
 <template>
   <div class="listContainer">
-    <div class="cabecera-inicio" :style="`background-image : url(${imagenPrimera});background-position : center center;background-size : cover;background-repeat : no-repeat`">
+    <div class="cabecera-inicio imagen-primera-noticia" :style="`background-image : url(${imagenPrimera}); `">
       <img src="/img/mundicio.svg" alt="" class="logo-mundicio">
 
       <img src="/img/icono-menu.svg" alt="" class="icono-menu">
@@ -127,29 +127,4 @@ export default {
 </script>
 
 
-<style scoped>
-.listContainer{
-  width: 100vw;
-  height: 100vh;
-}
-
-.icono-menu2{
-    position: absolute;
-    width: 30px;
-    padding: 1rem;
-    right: 100px;
-    border: 1px solid black;
-    cursor: pointer;
-}
-.input{
-  border: 1px solid black;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 1s;
-}
-.fade-enter, .fade-leave-to{
-  opacity: 0;
-}
-</style>
 
