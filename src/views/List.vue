@@ -8,7 +8,7 @@
       <img v-if="!loading" src="/img/icono-menu.svg" alt class="icono-menu">
       <div v-if="loading" class="cargando">
         <Loading></Loading>
-        <p class="parrafo">Cargando noticias ...</p>
+        <p class="parrafo-loading">Cargando noticias ...</p>
       </div>
 
       <div v-if="!loading">
@@ -133,32 +133,6 @@ export default {
 
 
 <style scoped>
-.listContainer {
-  width: 100vw;
-  height: 100vh;
-}
-
-.icono-menu2 {
-  position: absolute;
-  width: 30px;
-  padding: 1rem;
-  right: 100px;
-  border: 1px solid black;
-  cursor: pointer;
-}
-.input {
-  border: 1px solid black;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .cargando {
   position: absolute;
   left: 59%;
@@ -167,7 +141,7 @@ export default {
   -webkit-transform: translate(-50%, -50%);
 }
 
-.parrafo {
+.parrafo-loading {
   color: white;
 }
 </style>
