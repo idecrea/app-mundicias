@@ -1,7 +1,10 @@
 <template>
   <div class="news">
     <div class="header">
-      <router-link class="header__regresar" :to="{ name:'list' }"></router-link>
+      <router-link class="header__regresar" :to="{ name:'list' }">
+        <div id="svg"></div>
+        <object id="my-svg" type="image/svg+xml" data="/img/icono-atras.svg"></object>
+      </router-link>
       <div class="header__data">
         <div class="header__fecha">
           <p>
@@ -40,3 +43,6 @@
     </div>
   </div>
 </template>
+
+<script>
+</script>
