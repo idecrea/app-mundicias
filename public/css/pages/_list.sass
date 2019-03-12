@@ -1,5 +1,6 @@
 .listContainer
     background-color: $turquesa-oscuro
+    min-height: 100vh
 
 .cabecera-inicio
     position: fixed
@@ -8,7 +9,8 @@
     right: 0
     position: relative
     height: 230px
-    background-color: 
+    filter: grayscale(100%)
+    
     
 .icono-menu
     position: absolute
@@ -16,12 +18,14 @@
     padding: 1rem
     right: 0
 
+
+
 .logo-mundicio
     position: absolute
     left: 0
     top: 0
     padding: 1rem
-    height: 70%
+    height: 60%
 
 .noticia // div
     background-color: $gris
@@ -51,6 +55,33 @@
         p 
             text-align: right
             
-        
-        
+.icono-menu2
+    position: absolute
+    width: 20px
+    padding: 1rem
+    right: 0
+    bottom: 0
+    cursor: pointer
+
+.input
+    padding: 1rem
+    background-color: $blanco
+    position: absolute
+    bottom: 0
+    right: 0
+    left: 0
+    width: 100%
+
+
+.fade-enter-active, .fade-leave-active 
+    transition: opacity 1s
+
+.fade-enter, .fade-leave-to
+    opacity: 0
+
+.imagen-primera-noticia
+    background-position: center center
+    background-size: cover
+    background-repeat: no-repeat
+
         
