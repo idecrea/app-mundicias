@@ -1,16 +1,10 @@
 <template>
   <div class="news">
     <div class="header">
-<<<<<<< HEAD
       <router-link class="header__regresar" :to="{ name:'list' }">
-        <div id="svg"></div>
-        <object id="my-svg" type="image/svg+xml" data="/img/icono-atras.svg"></object>
+        <div class="header__regresar-flecha anime-inicio" id="flecha"></div>
       </router-link>
-      <div class="header__data">
-=======
-      <router-link class="header__regresar" :to="{ name:'list' }"></router-link>
       <div v-if="baseDatos.length > 0" class="header__data">
->>>>>>> 9f13745651c33bb8de7ff8157a8e5a9db5984d69
         <div class="header__fecha">
           <p>
             {{noticia.pubDate | tiempoTranscurrido}}
@@ -21,9 +15,9 @@
              {{ noticia.categories[0] }}
           </p>
         </div>
-        <div class="header__duracion">
+        <div class="header__duracion" >
           <p v-if="noticia.content !=''">
-           Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} minutos
+           Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} min
           </p>
         </div>
       </div>
@@ -56,7 +50,6 @@ moment.locale('es');
 export default {
   name : 'news',
   components : {
-
   },
   data : function (){
     return {
@@ -77,6 +70,12 @@ export default {
     this.noticia = this.baseDatos[this.posicionPasada];
 
     console.log(this.noticia);
+
+    let flecha = document.querySelector('#flecha');
+    setTimeout (function () {
+        this.flecha.classList.remove('anime-inicio');
+        this.flecha.classList.add('anime');
+      }, 2000)
 
   },
   filters :{

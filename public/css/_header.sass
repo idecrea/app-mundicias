@@ -13,8 +13,22 @@
         height: 40px
         width: 40px
         margin-left: 1.5rem
-// background-color: $turquesa-oscuro //
-// mask-image: url(../img/icono-atras.svg) //
+        background-color: $turquesa-oscuro
+        mask-image: url(../img/icono-atras.svg)
+        display: flex
+        justify-content: center
+        align-items: center
+        animation-name: aniCuadrado
+        animation-duration: 1s
+        animation-timing-function: ease-out
+    &__regresar-flecha
+        height: 23px
+        width: 23px
+        background-color: $blanco
+        mask-image: url(../img/icono-atras-flecha.svg)
+        mask-repeat: no-repeat
+        mask-position: center
+        margin-right: 3px
     &__data
         display: flex
         flex-direction: column
@@ -26,9 +40,19 @@
         justify-items: center
         align-items: center
     &__fecha
-        font-size: .6rem
+        font-size: .7rem
         margin-bottom: .25rem
     &__duracion
         font-style: italic
-        font-size: .6rem
+        font-size: .7rem
         margin-top: .25rem
+
+.anime-inicio
+    animation-name: aniFlechaInicio
+    animation-duration: 2s
+    animation-timing-function: ease-out
+.anime
+    animation-name: aniFlecha
+    animation-duration: 2s
+    animation-timing-function: ease-out
+    animation-iteration-count: infinite

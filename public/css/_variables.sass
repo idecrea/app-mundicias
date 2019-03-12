@@ -4,3 +4,25 @@ $azul-celeste: #ebf6f8
 $gris: #dcdcdc
 $negro: #000000
 $blanco: #ffffff
+
+@keyframes aniCuadrado
+    from 
+        transform: scale(0) rotate(0deg)
+    to 
+        transform: scale(1) rotate(90deg)
+
+@keyframes aniFlechaInicio
+    0%
+        transform: scale(0, 0)
+    50%
+        transform: scale(0, 0)
+    100% 
+        transform: scale(1, 1)
+
+@keyframes aniFlecha
+    0% 
+        transform: scale(1, 1)
+    50%
+        transform: scale(.8, .8)
+    100%
+        transform: scale(1, 1)
