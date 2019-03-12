@@ -18,6 +18,9 @@
         display: flex
         justify-content: center
         align-items: center
+        animation-name: aniCuadrado
+        animation-duration: 1s
+        animation-timing-function: ease-out
     &__regresar-flecha
         height: 23px
         width: 23px
@@ -26,8 +29,6 @@
         mask-repeat: no-repeat
         mask-position: center
         margin-right: 3px
-        
-        
     &__data
         display: flex
         flex-direction: column
@@ -48,10 +49,10 @@
 
 .anime-inicio
     animation-name: aniFlechaInicio
-    animation-duration: 1.25s
+    animation-duration: 2s
     animation-timing-function: ease-out
 .anime
     animation-name: aniFlecha
     animation-duration: 2s
-    animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95)
+    animation-timing-function: ease-out
     animation-iteration-count: infinite

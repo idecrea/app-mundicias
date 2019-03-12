@@ -2,7 +2,7 @@
   <div class="news">
     <div class="header">
       <router-link class="header__regresar" :to="{ name:'list' }">
-        <div class="header__regresar-flecha anime-inicio" id="flecha" :class="{'anime-inicio'}"></div>
+        <div class="header__regresar-flecha anime-inicio" id="flecha"></div>
       </router-link>
       <div v-if="baseDatos.length > 0" class="header__data">
         <div class="header__fecha">
@@ -71,15 +71,11 @@ export default {
 
     console.log(this.noticia);
 
-    let vivus = new Vivus('my-svg', {duration: 2000});
-
-    setTimeout(function () {
-          let flecha = document.querySelector('#flecha')
-
-      flecha.classList.remove('anime-inicio')
-      flecha.classList.add('anime')
-    }, 1250)
-
+    let flecha = document.querySelector('#flecha');
+    setTimeout (function () {
+        this.flecha.classList.remove('anime-inicio');
+        this.flecha.classList.add('anime');
+      }, 2000)
 
   },
   filters :{
