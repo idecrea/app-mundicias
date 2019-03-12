@@ -13,15 +13,17 @@
 
       <div v-if="!loading">
         <transition name="fade">
-          <input
-            v-if="mostrar"
-            type="text"
-            v-model="busqueda"
-            placeholder="Titulo de la noticia"
-            class="input"
-          >
+          <div v-if="mostrar">
+            <input
+              type="text"
+              v-model="busqueda"
+              placeholder="Titulo de la noticia"
+              class="input"
+            >
+            <img src="/img/icono-cross.svg" alt="" class="icono-cerrar-buscador" @click="mostrar = !mostrar">
+          </div>
         </transition>
-        <img @click="mostrar = !mostrar" src="/img/search.svg" alt class="icono-menu2">
+        <img v-if="!mostrar" @click="mostrar = !mostrar" src="/img/search.svg" alt class="icono-menu2">
       </div>
     </div>
     <div v-for="(noticia,pos) in arrayNoticiasFiltrado" :key="noticia.id" class="noticia">

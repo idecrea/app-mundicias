@@ -5,19 +5,21 @@
         <div class="header__regresar-flecha anime-inicio" id="flecha"></div>
       </router-link>
       <div v-if="baseDatos.length > 0" class="header__data">
-        <div class="header__fecha">
-          <p>
-            {{noticia.pubDate | tiempoTranscurrido}}
-          </p>
+        <div class="header__time">
+          <div class="header__time__fecha">
+            <p>
+              {{noticia.pubDate | tiempoTranscurrido}} |
+            </p>
+          </div>
+          <div class="header__time__duracion" >
+            <p v-if="noticia.content !=''">
+            Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} min
+            </p>
+          </div>
         </div>
         <div class="header__categoria">
           <p>
              {{ noticia.categories[0] }}
-          </p>
-        </div>
-        <div class="header__duracion" >
-          <p v-if="noticia.content !=''">
-           Tiempo lectura : {{noticia.content | quitarHTML | tiempoLectura}} min
           </p>
         </div>
       </div>

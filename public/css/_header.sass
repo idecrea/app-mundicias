@@ -1,5 +1,5 @@
 .header
-    height: 60px
+    height: 65px
     position: fixed
     left: 0
     top: 0
@@ -39,13 +39,17 @@
         display: flex
         justify-items: center
         align-items: center
-    &__fecha
-        font-size: .7rem
-        margin-bottom: .25rem
-    &__duracion
-        font-style: italic
-        font-size: .7rem
-        margin-top: .25rem
+    &__time
+        display: flex
+        align-items: flex-end
+        margin: 0.4rem 0
+        &__fecha
+            font-size: .8rem
+        &__duracion
+            font-style: italic
+            font-size: .7rem
+            margin-left: .3rem
+
 
 .anime-inicio
     animation-name: aniFlechaInicio
