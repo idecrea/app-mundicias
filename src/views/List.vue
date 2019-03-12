@@ -5,7 +5,7 @@
       :style="`background-image : url(${imagenPrimera}); `"
     >
       <img v-if="!loading" src="/img/mundicio.svg" alt class="logo-mundicio">
-      <img v-if="!loading" src="/img/icono-menu.svg" alt class="icono-menu">
+      <img v-if="!loading" @click.prevent="openCategories" src="/img/icono-menu.svg" alt class="icono-menu">
       <div v-if="loading" class="cargando">
         <Loading></Loading>
         <p class="parrafo-loading">Cargando noticias ...</p>
@@ -28,7 +28,7 @@
       <router-link :to="{ name : 'news',params : {pos : pos} }" v-if="cleanHTML(noticia.content) != ''">
           <h1 class="noticia__titulo">{{ noticia.title }}</h1>
           <ol class="noticia__categoria">
-              <li v-for="categoria in noticia.categories" :key="categoria.id">{{ categoria }}</li>
+              <li v-for="categoria in noticia.categories" :key="categoria.id">{{ categoria | limpiarHTML }}</li>
           </ol>
           <div class="noticia__tiempo">
             <p>{{ noticia.pubDate | tiempoTranscurrido}}</p>
@@ -36,6 +36,15 @@
           </div>
 
       </router-link>
+    </div>
+    <div>
+      <h2>Categorias</h2>
+      <ol>
+        <li @click="categoria_seleccionada = ''"><a>Todas</a></li>
+        <li v-for="categoria in arrayCategorias" @click="categoria_seleccionada = categoria" :key="categoria.id">
+          <a>{{ categoria | limpiarHTML}}</a>
+          </li>
+      </ol>
     </div>
   </div>
 </template>
@@ -60,7 +69,9 @@ export default {
         mostrar : false,
         imagenPrimera : '',
         busqueda : '',
-        loading : true
+        categoria_seleccionada : '',
+        loading : true,
+        arrayCategorias : [],
     }
 
   },
@@ -76,7 +87,6 @@ export default {
         .then(function (response) {
         // handle success
 
-        console.log(response);
         that.cleanArray(response.data.items);
 
         let bd = {
@@ -84,7 +94,6 @@ export default {
         };
         localStorage.setItem("baseDatos", JSON.stringify(bd));
         that.loading = false;
-        console.log(that.arrayNoticias);
       })
       .catch(function (error) {
         // handle error
@@ -105,7 +114,19 @@ export default {
         } else {
         }
       }
-      //console.log(this.arrayNoticias);
+    },
+    openCategories : function(){
+
+      for(let noticia of this.arrayNoticias){
+
+          for(let categoria of noticia.categories){
+            this.arrayCategorias.push(categoria);
+
+            this.arrayCategorias = this._.uniq(this.arrayCategorias);
+            //console.log(this.arrayCategorias);
+          }
+
+      }
     }
   },
   filters: {
@@ -121,6 +142,11 @@ export default {
       let palabras_minuto = 150;
       texto = texto.split(" ");
       return Math.ceil(texto.length / palabras_minuto);
+     },
+     limpiarHTML : function(texto){
+        let that = this;
+        texto = _.unescape(texto);
+       return texto;
      }
   },
   computed : {
@@ -128,14 +154,37 @@ export default {
 
       // BUSCADOR
 
-      let lista = [];
-  
-      for(let item of this.arrayNoticias){
-        if(this.busqueda == '' || item.title.toUpperCase().includes(`${this.busqueda.toUpperCase()}`)){
+      let lista = this.arrayNoticias;
+      let that = this;
+
+    if(this.busqueda != '') {
+      lista = lista.filter(function (item) {
+
+        return item.title.toUpperCase().includes(`${that.busqueda.toUpperCase()}`)
+      });
+    }
+
+      if(this.categoria_seleccionada != '') {
+        lista = lista.filter(function (item) {
+
+          return item.categories.includes(that.categoria_seleccionada)
+        });
+      }
+      return lista;
+      /*for(let item of this.arrayNoticias){
+        //console.log(item.categories.includes(this.categoria_seleccionada));
+        if(
+          this.busqueda == '' ||
+          item.title.toUpperCase().includes(`${this.busqueda.toUpperCase()}`) ||
+          this.categoria_seleccionada == '' ||
+          item.categories.includes(this.categoria_seleccionada)
+          ){
+         
           lista.push(item);
           }
-        }
-      return lista;
+        
+      }
+      return lista;*/
     }
   }
 };
