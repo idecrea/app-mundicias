@@ -39,9 +39,10 @@
 
       </router-link>
     </div>
-    <div>
+    <div v-if="menuCategorias" class="menu-categorias">
+      <img src="/img/icono-cross.svg" alt="" class="icono-cerrar-categorias" @click="menuCategorias = false">
       <h2>Categorias</h2>
-      <ol>
+      <ol class="menu-categorias__lista">
         <li @click="categoria_seleccionada = ''"><a>Todas</a></li>
         <li v-for="categoria in arrayCategorias" @click="categoria_seleccionada = categoria" :key="categoria.id">
           <a>{{ categoria | limpiarHTML}}</a>
@@ -71,6 +72,7 @@ export default {
         mostrar : false,
         imagenPrimera : '',
         busqueda : '',
+        menuCategorias: false,
         categoria_seleccionada : '',
         loading : true,
         arrayCategorias : [],
@@ -127,8 +129,9 @@ export default {
             this.arrayCategorias = this._.uniq(this.arrayCategorias);
             //console.log(this.arrayCategorias);
           }
-
+        this.menuCategorias = true;
       }
+      
     }
   },
   filters: {
