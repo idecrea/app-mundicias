@@ -40,11 +40,11 @@
       </router-link>
     </div>
     <div v-if="menuCategorias" class="menu-categorias">
-      <img src="/img/icono-cross.svg" alt="" class="icono-cerrar-categorias" @click="menuCategorias = false">
-      <h2>Categorias</h2>
+      <img src="/img/icono-cross-menu.svg" alt="" class="icono-cerrar-categorias" @click="menuCategorias = false">
+      <h2>Categorías</h2>
       <ol class="menu-categorias__lista">
-        <li @click="categoria_seleccionada = ''"><a>Todas</a></li>
-        <li v-for="categoria in arrayCategorias" @click="categoria_seleccionada = categoria" :key="categoria.id">
+        <li @click="categoria_seleccionada = ''; menuCategorias = false"><a>Todas</a></li>
+        <li v-for="categoria in arrayCategorias" @click="categoria_seleccionada = categoria; menuCategorias = flase" :key="categoria.id">
           <a>{{ categoria | limpiarHTML}}</a>
           </li>
       </ol>
