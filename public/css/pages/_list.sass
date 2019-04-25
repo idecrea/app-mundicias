@@ -1,6 +1,7 @@
 .listContainer
     background-color: $turquesa-oscuro
     min-height: 100vh
+    height: 100%
 
 .cabecera-inicio
     position: fixed
@@ -92,7 +93,6 @@
 
         
 .menu-categorias
-    position: relative
     position: fixed
     top: 0
     bottom: 0
@@ -102,14 +102,20 @@
     color: $turquesa-oscuro
     overflow: scroll
     .icono-cerrar-categorias
-        position: absolute
+        position: fixed
         top: 0
         right: 0
         padding: 1.3rem
         width: 25px
         height: 25px
+        z-index: 50
     h2 
-        padding: 1.4rem
+        padding: 1.5rem
+        position: fixed
+        top: 0
+        left: 0
+        right: 0
+        background-color: $blanco
     &__lista
         list-style: none
         width: 90vw
@@ -117,10 +123,9 @@
         flex-direction: column
         justify-content: space-between
         padding-inline-start: 0px
-        margin: auto
-        margin-bottom: 2rem
+        margin: 75px auto 2rem
         li 
-            margin-top: 0.6rem
-            margin-bottom: 0.6rem
+            margin-top: 1rem
+            margin-bottom: 1rem
             text-align: center
             text-transform: uppercase
